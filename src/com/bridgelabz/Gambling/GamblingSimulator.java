@@ -8,19 +8,27 @@ public class GamblingSimulator {
 	private static final int IS_LOOSE = 0;
 
 	public static void main(String[] args) {
-	
-		 int winAmountINADay=0,looseAmountINADay=0;
+
+		int totalStackValue = 100, dailyBet = 0;
 		System.out.println("gambler starting with a stake of : $" + STAKE + " and bet in every game is : $" + BET);
-		double randomCheck =  Math.random()*2;
-		
-		switch((int)randomCheck) {
-		case IS_WIN:
-			winAmountINADay+=BET;
-			System.out.println("win amount in a day is = " + winAmountINADay);
-			break;
-		default :
-			looseAmountINADay -= BET;
-			System.out.println("loose amount in a day = " + looseAmountINADay);
+
+		while (dailyBet <= STAKE / 2) {
+
+			double randomCheck = Math.random() * 2;
+			switch ((int) randomCheck) {
+				case IS_WIN:
+					totalStackValue += BET;
+					break;
+				default:
+					totalStackValue -= BET;
+			}
+
+			dailyBet += BET;
 		}
+		if (totalStackValue > STAKE)
+			System.out.println("win amount in a day is = " + (totalStackValue - STAKE));
+
+		else
+			System.out.println("loose amount in a day = " + (STAKE - totalStackValue));
 	}
 }
